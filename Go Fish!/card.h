@@ -36,6 +36,8 @@ class Card
 
     Card(int rank, Suit s);
 
+    Card(const Card& c);
+
     string toString()              const;  // return string version e.g. Ac 4h Js
     bool sameSuitAs(const Card& c) const;  // true if suit same as c
     int  getRank()                 const;  // return rank, 1..13
@@ -46,7 +48,7 @@ class Card
     
     bool operator == (const Card& rhs) const;
     bool operator != (const Card& rhs) const;
-    
+    Card& operator = (const Card& c);
 
     
   private:
