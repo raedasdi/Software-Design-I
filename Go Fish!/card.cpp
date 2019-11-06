@@ -14,6 +14,11 @@ using namespace std;
         mySuit = s;
     }
 
+    Card::Card(const Card& c){
+        this->myRank = c.myRank;
+        this->mySuit = c.mySuit;
+    }
+
     string Card::toString() const{               // return string version e.g. Ac 4h Js
         string rank = rankString(myRank);
         string suit = suitString(mySuit);
@@ -23,7 +28,7 @@ using namespace std;
     }
     
     bool Card::sameSuitAs(const Card& c) const{  // true if suit same as c
-        if (mySuit == c.mySuit) {return true;}
+        if (this->mySuit == c.mySuit) {return true;}
         else {return false;}
     }    
 
@@ -74,13 +79,20 @@ using namespace std;
     }
 
     bool Card::operator == (const Card& rhs) const{
-        if (myRank == rhs.myRank && mySuit == rhs.mySuit) {return true;}
+        if (this->myRank == rhs.myRank && this->mySuit == rhs.mySuit) {return true;}
         else {return false;}
 
     }
 
     bool Card::operator != (const Card& rhs) const{
-        if (myRank != rhs.myRank || mySuit != rhs.mySuit) {return true;}
+        if (this->myRank != rhs.myRank || this->mySuit != rhs.mySuit) {return true;}
         else {return false;}
 
+    }
+
+    Card& Card::operator =(const Card c){
+        this->myRank = c.myRank;
+        this->mySuit = c.mySuit;
+
+        return *this;
     }
