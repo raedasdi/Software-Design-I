@@ -96,3 +96,8 @@ using namespace std;
 
         return *this;
     }
+
+    ostream& operator << (ostream& out, const Card &c){
+    out << c.toString();
+    return out;
+    }
