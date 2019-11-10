@@ -74,6 +74,7 @@ using namespace std;
         for (int i = 0; i < myHand.size(); i++){
             if (c == myHand.at(i)) myHand.erase(myHand.begin()+i);
         }
+        return c;
     } 
     
     string Player::showHand() const{
