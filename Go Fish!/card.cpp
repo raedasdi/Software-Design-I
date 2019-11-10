@@ -1,5 +1,4 @@
 #include "card.h"
-#include <stdlib>
 #include <iostream>
 #include <string>
 using namespace std;
@@ -14,9 +13,9 @@ using namespace std;
         mySuit = s;
     }
 
-    Card::Card(const Card& c){
-        this->myRank = c.myRank;
-        this->mySuit = c.mySuit;
+    Card::Card(const Card &c) {
+        mySuit = c.mySuit;
+        myRank = c.myRank;
     }
 
     string Card::toString() const{               // return string version e.g. Ac 4h Js
@@ -90,11 +89,10 @@ using namespace std;
 
     }
 
-    Card& Card::operator =(const Card c){
-        this->myRank = c.myRank;
-        this->mySuit = c.mySuit;
+    void Card::operator=(const Card &rhs) {
+        myRank = rhs.myRank;
+        mySuit = rhs.mySuit;
 
-        return *this;
     }
 
     ostream& operator << (ostream& out, const Card &c){
