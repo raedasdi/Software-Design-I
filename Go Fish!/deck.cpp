@@ -31,24 +31,20 @@ using namespace std;
 
         myIndex = 0;
 
-        time_t current_time;
-        current_time = time(NULL);
-        srand(current_time);
+        srand((unsigned)time(0));
     }
 
     void Deck::shuffle(){   // shuffle the deck, all 52 cards present
         unsigned int sw1=1, sw2=1;
+        Card temp;
 
         for (int i = 0; i < SIZE*2; i++) {
+                sw1 = (rand() % SIZE);
+                sw2 = (rand() % SIZE);
 
-            while (sw1 < myIndex || sw2 < myIndex) {
-                sw1 = rand() % 52;
-                sw2 = rand() % 52;
-            }
-
-            Card temp(myCards[sw1]);
-            myCards[sw1] = myCards[sw2];
-            myCards[sw2] = temp;
+                temp = myCards[sw1];
+                myCards[sw1] = myCards[sw2];
+                myCards[sw2] = temp;
 
         }
 
@@ -66,5 +62,5 @@ using namespace std;
     }
 
     int  Deck::size() const{ // # cards left in the deck
-        return (SIZE-(myIndex+1));
+        return (SIZE-myIndex);
     }
