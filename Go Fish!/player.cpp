@@ -1,22 +1,12 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <ctime>
 
 #include "player.h"
 #include "card.h"
 using namespace std;
 
-
-    Player::Player();
-
-    Player::Player(string name) {
-       myName = name;
-    }
-
-    string Player::getName() const {
-       return myName;
-    }
-    
     void Player::addCard(Card c){
         myHand.push_back(c);
     }
@@ -33,11 +23,10 @@ using namespace std;
     //If a pair is found, it returns true and populates the two variables with the cards that make the pair.
 
     bool Player::checkHandForBook(Card &c1, Card &c2){
-       Card Card1,Card2;
         for(int i = 0; i < myHand.size();i++){
-            Card1 = myHand.at(i);
+            Card Card1(myHand.at(i));
             for (int j = i+1; j < myHand.size(); j++) {
-                Card2 = myHand.at(j);
+                Card Card2(myHand.at(j));
                 if (Card1.getRank() == Card2.getRank()) {
                     c1 = Card1;
                     c2 = Card2;
@@ -45,7 +34,7 @@ using namespace std;
                 }
             }
        }
-        else return false;
+       return false;
     }
 
     //OPTIONAL
@@ -66,13 +55,10 @@ using namespace std;
     //uses some strategy to choose one card from the player's
     //hand so they can say "Do you have a 4?"
     Card Player::chooseCardFromHand() const{
-        Card c1, c2;
-        if(this->checkHandForBook(c1, c2)) {
-            return c1;
-        }
-        else {
-            return myHand.at(0);
-        }
+        int i = rand() % myHand.size();
+        Card pick = myHand.at(i);
+        return pick;
+
     } 
     
     //Does the player have the card c in her hand?
@@ -91,17 +77,23 @@ using namespace std;
     } 
     
     string Player::showHand() const{
-        string out;
+        string out = " ";
+        Card c;
         for (int i = 0; i < myHand.size(); i++){
-            out << myHand.at(i) << " ";
+            c = myHand.at(i);
+            out += c.toString();
+            out += " ";
         }
         return out;
     }
  
     string Player::showBooks() const{
-        string out;
+        string out = " ";
+        Card c;
         for (int i = 0; i < myBook.size(); i++){
-            out << myBook.at(i)<< " ";
+            c = myBook.at(i);
+            out += c.toString();
+            out += " ";
         }
         return out;
     }
@@ -120,11 +112,10 @@ using namespace std;
     //If a pair is found, it returns true and populates the two variables with the cards tha make the pair.
 
     bool Player::checkHandForPair(Card &c1, Card &c2) {
-        Card Card1, Card2;
-        for (int i = 0; i < myHand.size(); i++) {
-            Card1 = myHand.at(i);
+        for (int i = 0; i < myHand.size(); ++i) {
+            Card Card1(myHand.at(i));
             for (int j = i + 1; j < myHand.size(); j++) {
-                Card2 = myHand.at(j);
+                Card Card2(myHand.at(j));
                 if (Card1.getRank() == Card2.getRank()) {
                     c1 = Card1;
                     c2 = Card2;
@@ -132,7 +123,7 @@ using namespace std;
                 }
             }
         }
-        else return false;
+        return false;
     }
 
     //OPTIONAL
