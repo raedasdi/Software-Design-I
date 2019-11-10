@@ -79,26 +79,24 @@ using namespace std;
     //Remove the card c from the hand and return it to the caller
     Card Player::removeCardFromHand(Card c){
         int cRank = c.getRank();
+        vector<Card>::iterator index = myHand.begin();
         Card handCard;
-        int index = 0;
-
 
         for (int i = 0; i < myHand.size(); i++){
             handCard = myHand.at(i);
-            if (cRank == handCard.getRank()) myHand.erase(myHand.begin()+index);
+            if (cRank == (myHand.at(i)).getRank()) myHand.erase(index);
             index++;
         }
-        
+
         return handCard;
     }
 
     void Player::removeCardFromBook(Card c){
         int cRank = c.getRank();
-        int index=0;
-        Card bookCard;
+        vector<Card>::iterator index = myBook.begin();
+
         for (int i = 0; i < myBook.size(); i++){
-            bookCard = myBook.at(i);
-            if (cRank == bookCard.getRank()) myBook.erase(myHand.begin()+index);
+            if (cRank == (myBook.at(i)).getRank()) myBook.erase(index);
             index++;
         }
     }
