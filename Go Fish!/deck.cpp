@@ -6,9 +6,25 @@ using namespace std;
     
     Deck::Deck(){           // pristine, sorted deck
         myIndex = 0;
+        Card::Suit s;
         for (int i = 0; i < 4; i++){
+            switch(i){
+                case 0:
+                    s = Card::spades;
+                    break;
+                case 1:
+                    s = Card::hearts;
+                    break;
+                case 2:
+                    s = Card::diamonds;
+                    break;
+                case 3:
+                    s = Card::clubs;
+                    break;
+            }
             for (int j = 1; j < 14; j++){
-                myCards[myIndex] = Card c(j, i);
+
+                myCards[myIndex] = *(new Card(j, s));
                 myIndex++;
             }
         }
@@ -22,15 +38,15 @@ using namespace std;
 
     void Deck::shuffle(){   // shuffle the deck, all 52 cards present
         unsigned int sw1=1, sw2=1;
-        Card temp;
 
-        for (int i = 0, i < SIZE*2; i++) {
+        for (int i = 0; i < SIZE*2; i++) {
 
             while (sw1 < myIndex || sw2 < myIndex) {
                 sw1 = rand() % 52;
                 sw2 = rand() % 52;
             }
-            temp = myCards[sw1];
+
+            Card temp(myCards[sw1]);
             myCards[sw1] = myCards[sw2];
             myCards[sw2] = temp;
 
