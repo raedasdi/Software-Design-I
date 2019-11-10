@@ -65,7 +65,7 @@ int main (){
                 cout << p1.getName() << ": Do you have any " << p1Card.rankString(p1Card.getRank()) << "'s?"<< endl;
                 delay(2);
 
-                cout << p2.getName() << "'s Hand: " << p2.showHand();
+                cout << p2.getName() << "'s Hand: " << p2.showHand() << endl;
                 delay(2);
 
                 if(p2.sameRankInHand(p1Card)) {
@@ -149,7 +149,7 @@ int main (){
                 cout << p2.getName() << ": Do you have any " << p1Card.rankString(p2Card.getRank()) << "'s?"<< endl;
                 delay(2);
 
-                cout << p1.getName() << "'s Hand: " << p1.showHand();
+                cout << p1.getName() << "'s Hand: " << p1.showHand() << endl;
                 delay(2);
 
                 cardCounter = 0;
