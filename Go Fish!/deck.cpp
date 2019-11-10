@@ -52,13 +52,9 @@ using namespace std;
 
     }
 
-    Card Deck::dealCard(){   // get a card, after 52 are dealt, fail 
-        if(myIndex<52) {
+    Card Deck::dealCard(){   // get a card, after 52 are dealt, fail
             myIndex++;
             return myCards[myIndex-1];
-        }
-        else
-            cout<<"No More Cards!"<<endl;
     }
 
     int  Deck::size() const{ // # cards left in the deck
