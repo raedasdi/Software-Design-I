@@ -71,11 +71,21 @@ using namespace std;
     
     //Remove the card c from the hand and return it to the caller
     Card Player::removeCardFromHand(Card c){
+        int cRank = c.getRank();
         for (int i = 0; i < myHand.size(); i++){
-            if (c == myHand.at(i)) myHand.erase(myHand.begin()+i);
+            Card handCard = myHand.at(i);
+            if (cRank == handCard.getRank) myHand.erase(myHand.begin()+i);
         }
-        return c;
-    } 
+        return handCard;
+    }
+
+    void Player::removeCardFromBook(Card c){
+        int cRank = c.getRank();
+        for (int i = 0; i < myBook.size(); i++){
+            Card bookCard = myBook.at(i);
+            if (cRank == bookCard.getRank) myBook.erase(myHand.begin()+i);
+        }
+    }
     
     string Player::showHand() const{
         string out = " ";
@@ -104,7 +114,7 @@ using namespace std;
     }
 
     int Player::getBookSize() const{
-        return myBook.size();
+        return (myBook.size()/2);
     }
        
     //OPTIONAL
