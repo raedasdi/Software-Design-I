@@ -44,9 +44,15 @@ int main (){
     player = rand() % 3;
     if (player == 0) player = 1;
 
-    bool gameOn = true;
-    while (gameOn) {
+    int nextPlayer = player;
 
+    bool gameOn = true;
+
+    Card p1Card, p2Card, book1, book2, p1Draw, p2Draw, p2Remove, p1Remove, book3, book4;
+    int cardCounter=0;
+
+    while (gameOn) {
+        player = nextPlayer;
         switch(player){
 
             case 1:
@@ -55,37 +61,35 @@ int main (){
                 delay(2);
                 cout << p1.getName() << "'s Hand is: " << p1.showHand() << endl;
                 delay(2);
-                Card p1Card = p1.chooseCardFromHand();
+                p1Card = p1.chooseCardFromHand();
                 cout << p1.getName() << ": Do you have any " << p1Card.rankString(p1Card.getRank()) << "'s?"<< endl;
                 delay(2);
 
                 cout << p2.getName() << "'s Hand: " << p2.showHand();
                 delay(2);
 
-                int p2CardCounter = 0;
-
-                if(p2.cardInHand(p1Card)) {
+                if(p2.sameRankInHand(p1Card)) {
 
                     cout << p2.getName() << ": Yes I do." << endl;
                     delay(2);
 
-                    while (p2.cardInHand(p1Card)) {
+                    while (p2.sameRankInHand(p1Card)) {
 
-                        Card p2Remove = p2.removeCardFromHand(p1Card);
+                        p2Remove = p2.removeCardFromHand(p1Card);
                         p1.addCard(p2Remove);
-                        cout << p2.getName() << " gives " << p1.getName() << " their " << p2Remove << endl
+                        cout << p2.getName() << " gives " << p1.getName() << " their " << p2Remove << endl;
                         delay(2);
-                        p2CardCounter++;
+                        cardCounter++;
 
                     }
 
-                    if (p2CardCounter > 1) {
+                    if (cardCounter > 1) {
 
                         p2.removeCardFromBook(p1Card);
                     }
 
-                    p2CardCounter = 0;
-                    player = 1;
+                    cardCounter = 0;
+                    nextPlayer = 1;
                 }
 
                 else {
@@ -96,7 +100,8 @@ int main (){
                     delay(2);
 
                     if (d.size() != 0) {
-                       Card p1Draw = p1.addCard(d.dealCard());
+                       p1Draw = d.dealCard();
+                       p1.addCard(p1Draw);
                        cout << p1.getName() << " draws a " << p1Draw << endl;
                        delay(2);
                     }
@@ -108,30 +113,28 @@ int main (){
 
                     }
 
-                    player = 2;
+                    nextPlayer = 2;
 
                 }
 
                 cout << p1.getName() <<"'s Hand: " << p1.showHand() << endl;
                 delay(2);
 
-                Card book1, book2;
-
                 if (p1.checkHandForBook(book1, book2)) {
+                        //while (p1.checkHandForBook(book1, book2)) {
 
-                    while (p1.checkHandForBook(book1, book2){
+                            p1.bookCards(book1, book2);
+                            cout << "Book Found! " << p1.getName() << " books the " << book1 << " and " << book2
+                                 << endl;
+                            delay(2);
 
-                        p1.bookCards(book1, book2);
-                        cout << "Book Found! " << p1.getName() << " books the " << book1 << " and " << book2 << endl;
-                        delay(2);
-                    }
 
                 }
 
                 if (p1.getBookSize() == WINSIZE) {
 
                     winner = p1.getName();
-                    gameOn = false
+                    gameOn = false;
 
                 }
                 break;
@@ -142,35 +145,35 @@ int main (){
                 delay(2);
                 cout << p2.getName() << "'s Hand is: " << p2.showHand() << endl;
                 delay(2);
-                Card p2Card = p2.chooseCardFromHand();
+                p2Card = p2.chooseCardFromHand();
                 cout << p2.getName() << ": Do you have any " << p1Card.rankString(p2Card.getRank()) << "'s?"<< endl;
                 delay(2);
 
                 cout << p1.getName() << "'s Hand: " << p1.showHand();
                 delay(2);
 
-                int p1CardCounter = 0;
+                cardCounter = 0;
 
-                if(p1.cardInHand(p2Card)) {
+                if(p1.sameRankInHand(p2Card)) {
 
                     cout << p1.getName() << ": Yes I do." << endl;
                     delay(2);
 
-                    while (p1.cardInHand(p2Card)) {
+                    while (p1.sameRankInHand(p2Card)) {
 
-                        Card p1Remove = p1.removeCardFromHand(p2Card);
+                        p1Remove = p1.removeCardFromHand(p2Card);
                         p2.addCard(p1Remove);
-                        cout << p1.getName() << " gives " << p2.getName() << " their " << p1Remove << endl
+                        cout << p1.getName() << " gives " << p2.getName() << " their " << p1Remove << endl;
                         delay(2);
-                        p1CardCounter++;
+                        cardCounter++;
                     }
 
-                    if (p1CardCounter > 1) {
+                    if (cardCounter > 1) {
                         p1.removeCardFromBook(p2Card);
                     }
 
-                    p1CardCounter = 0;
-                    player = 2;
+                    cardCounter = 0;
+                    nextPlayer = 2;
 
                 }
 
@@ -182,7 +185,8 @@ int main (){
                     delay(2);
 
                     if (d.size() != 0) {
-                        Card p2Draw = p2.addCard(d.dealCard());
+                        p2Draw = d.dealCard();
+                        p2.addCard(p2Draw);
                         cout << p2.getName() << " draws a " << p2Draw << endl;
                         delay(2);
                     }
@@ -190,24 +194,22 @@ int main (){
                         cout << "No more cards to deal!" << endl;
                         delay(2);
                     }
-                    player = 1;
+                    nextPlayer = 1;
 
                 }
 
                 cout << p2.getName() <<"'s Hand: " << p2.showHand() << endl;
                 delay(2);
 
-                Card book3, book4;
+                if (p2.checkHandForBook(book3, book4)) {
 
-                if (p2.checkHandForBook(book3, book4))
-
-                    while (p2.checkHandForBook(book3, book4){
+                    //while (p2.checkHandForBook(book3, book4)) {
 
                         p2.bookCards(book3, book4);
                         cout << "Book Found! " << p2.getName() << " books the " << book3 << " and " << book4 << endl;
                         delay(2);
 
-                    }
+                    //}
 
                 }
 
@@ -219,11 +221,9 @@ int main (){
         }
     }
 
-    cout << "finished" << endl;
+    cout << winner << " wins!" << endl;
 
-    cout << winner << " wins!";
-
-    return EXIT_SUCCESS;
+    return 0;
 }
 
 
@@ -254,11 +254,11 @@ void delay (int n){
     int dummy=0;
     const int DELAY = 100000000;
 
-    for (int i = 0; i < n; i++) {
+    /*for (int i = 0; i < n; i++) {
         while (dummy < DELAY){
             dummy++;
         }
         dummy = 0;
-    }
+    }*/
 
 }
