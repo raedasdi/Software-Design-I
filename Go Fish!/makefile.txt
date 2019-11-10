@@ -1,0 +1,2 @@
+cardtest: card_driver.cpp card.cpp card.h
+	g++ -c -std=c++11 card.cpp card_driver.cpp card.h
