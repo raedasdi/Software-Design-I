@@ -13,8 +13,33 @@ using namespace std;
 
   //adds a card to the hand
     void Player::bookCards(Card c1, Card c2){
-        myBook.push_back(c1);
-        myBook.push_back(c2);
+        vector<Card>::iterator it = myHand.begin();
+        Card push = c1;
+
+        for (int i = 0; i < 2; i++){
+
+            switch(i) {
+                case 0:
+                    push = c1;
+                    break;
+                case 1:
+                    push = c2;
+                    break;
+            }
+
+            it = myHand.begin();
+
+            while (it < myHand.end()) {
+
+                if (*it == push) {
+                    myBook.push_back(push);
+                    myHand.erase(it);
+                }
+
+                it++;
+            }
+        }
+
     }
 
     //OPTIONAL
@@ -70,6 +95,7 @@ using namespace std;
     }
 
     bool Player::cardsInBook(Card c) const{
+        if (getBookSize() == 0) return false;
         for (int i = 0; i < myHand.size(); i++){
             if (c == myHand.at(i)) return true;
         }
@@ -78,29 +104,24 @@ using namespace std;
     
     //Remove the card c from the hand and return it to the caller
     Card Player::removeCardFromHand(Card c){
-        int cRank = c.getRank();
-        vector<Card>::iterator index = myHand.begin();
-        Card handCard;
 
-        for (int i = 0; i < myHand.size(); i++){
-            handCard = myHand.at(i);
-            if (cRank == (myHand.at(i)).getRank()) myHand.erase(index);
-            index++;
+        Card removeCard;
+        vector<Card>::iterator it = myHand.begin();
+
+        for(int i = 0; i < myHand.size(); i++){
+            if(myHand.at(i).getRank() == c.getRank()){
+                removeCard = myHand.at(i);
+                while (*it != myHand.at(i)){
+                    it++;
+                }
+                myHand.erase(it);
+                myHand.shrink_to_fit();
+            }
         }
 
-        return handCard;
+        return removeCard;
     }
 
-    void Player::removeCardFromBook(Card c){
-        int cRank = c.getRank();
-        vector<Card>::iterator index = myBook.begin();
-
-        for (int i = 0; i < myBook.size(); i++){
-            if (cRank == (myBook.at(i)).getRank()) myBook.erase(index);
-            index++;
-        }
-    }
-    
     string Player::showHand() const{
         string out = " ";
         Card c;

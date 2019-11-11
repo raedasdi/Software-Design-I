@@ -56,8 +56,6 @@ class Player
     
     //Remove the card c from the hand and return it to the caller
     Card removeCardFromHand(Card c);
-
-    void removeCardFromBook(Card c);
     
     string showHand() const; 
     string showBooks() const; 
