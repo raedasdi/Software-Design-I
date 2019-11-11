@@ -56,11 +56,15 @@ class Player
     
     //Remove the card c from the hand and return it to the caller
     Card removeCardFromHand(Card c);
-    
-    string showHand() const; 
+
+    //returns a string of the Hand
+    string showHand() const;
+    //returns a string of the Book
     string showBooks() const; 
-    
-    int getHandSize() const; 
+
+    //returns an int of the Hand Size
+    int getHandSize() const;
+    //returns an int of the Book Size
     int getBookSize() const; 
        
     //OPTIONAL

@@ -13,7 +13,7 @@ using namespace std;
 
   //adds a card to the hand
     void Player::bookCards(Card c1, Card c2){
-        vector<Card>::iterator it = myHand.begin();
+        vector<Card>::iterator it = myHand.begin(); //iterator initialization found on cplusplus.com
         Card push = c1;
 
         for (int i = 0; i < 2; i++){
@@ -29,8 +29,8 @@ using namespace std;
 
             it = myHand.begin();
 
-            while (it < myHand.end()) {
-
+            while (it < myHand.end()) {             //iterator goes through hand to find card to book, then removes
+                                                    //it from hand
                 if (*it == push) {
                     myBook.push_back(push);
                     myHand.erase(it);
@@ -48,10 +48,12 @@ using namespace std;
     //If a pair is found, it returns true and populates the two variables with the cards that make the pair.
 
     bool Player::checkHandForBook(Card &c1, Card &c2){
-        for(int i = 0; i < myHand.size();i++){
-            Card Card1(myHand.at(i));
+        for(int i = 0; i < myHand.size();i++){              //essentially a select sort but instead it checks for
+            Card Card1(myHand.at(i));                       //two cards of the same rank
+
             for (int j = i+1; j < myHand.size(); j++) {
                 Card Card2(myHand.at(j));
+
                 if (Card1.getRank() == Card2.getRank()) {
                     c1 = Card1;
                     c2 = Card2;
@@ -69,6 +71,7 @@ using namespace std;
         int currRank = 0;
         int cardRank = c.getRank();
         Card currCard;
+
         for (int i = 0; i < myHand.size(); i++){
             currCard = myHand.at(i);
             currRank = currCard.getRank();
@@ -79,7 +82,7 @@ using namespace std;
     
     //uses some strategy to choose one card from the player's
     //hand so they can say "Do you have a 4?"
-    Card Player::chooseCardFromHand() const{
+    Card Player::chooseCardFromHand() const{        //no real strategy, will just choose random card from Hand
         int i = rand() % myHand.size();
         Card pick = myHand.at(i);
         return pick;
@@ -93,6 +96,7 @@ using namespace std;
         }
         return false;
     }
+
 
     bool Player::cardsInBook(Card c) const{
         if (getBookSize() == 0) return false;
