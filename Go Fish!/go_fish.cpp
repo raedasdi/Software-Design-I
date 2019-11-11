@@ -22,6 +22,10 @@ void delay (int n);
 
 int main (){
     srand((unsigned)time(0));
+    int argc = 0;
+
+    cout << "How much delay?\n0 - No Delay\n2 - Fast Game\n5 - Slow Game" << endl;
+    cin >> argc;
 
     int player = 0;
     int numCards = 7;
@@ -32,7 +36,7 @@ int main (){
     Player p2("Cod");
 
     cout << p1.getName() << " and " << p2.getName() << " are ready to play!" << endl;
-    delay(5);
+    delay(argc+3);
 
     Deck d;
     d.shuffle();
@@ -48,86 +52,103 @@ int main (){
 
     bool gameOn = true;
 
-    Card p1Card, p2Card, book1, book2, p1Draw, p2Draw, p2Remove, p1Remove, book3, book4;
-    int cardCounter=0;
+    Card p1Card, p2Card, book1, book2, p1Draw, p2Draw, p2Remove, p1Remove, book3, book4, newCard;
 
     while (gameOn) {
         player = nextPlayer;
         switch(player){
 
             case 1:
-
+                system("clear");
                 cout << "It is " << p1.getName() << "'s turn." << endl;
-                delay(2);
+                delay(argc);
+                if (p1.getHandSize() == 0) {
+                    if (d.size() != 0) {
+                        newCard = d.dealCard();
+                        p1.addCard(newCard);
+                    }
+                }
                 cout << p1.getName() << "'s Hand is: " << p1.showHand() << endl;
-                delay(2);
+                delay(argc);
                 p1Card = p1.chooseCardFromHand();
                 cout << p1.getName() << ": Do you have any " << p1Card.rankString(p1Card.getRank()) << "'s?"<< endl;
-                delay(2);
+                delay(argc);
 
                 cout << p2.getName() << "'s Hand: " << p2.showHand() << endl;
-                delay(2);
+                delay(argc);
 
-                if(p2.sameRankInHand(p1Card)) {
+                if(p2.getHandSize() != 0) {
+                    if (p2.sameRankInHand(p1Card)) {
 
-                    cout << p2.getName() << ": Yes I do." << endl;
-                    delay(2);
+                        cout << p2.getName() << ": Yes I do." << endl;
+                        delay(argc);
 
-                    while (p2.sameRankInHand(p1Card)) {
+                        while (p2.sameRankInHand(p1Card)) {
 
-                        p2Remove = p2.removeCardFromHand(p1Card);
-                        p1.addCard(p2Remove);
-                        cout << p2.getName() << " gives " << p1.getName() << " their " << p2Remove << endl;
-                        delay(2);
-                        cardCounter++;
+                            p2Remove = p2.removeCardFromHand(p1Card);
+                            p1.addCard(p2Remove);
+                            cout << p2.getName() << " gives " << p1.getName() << " their " << p2Remove << endl;
+                            delay(argc);
+
+                        }
+
+                        nextPlayer = 1;
+                    }
+                    else {
+
+                        cout << p2.getName() << ": Go Fish!" << endl;
+                        delay(argc);
+                        cout << p1.getName() << " fishes in the deck..." << endl;
+                        delay(argc);
+
+                        if (d.size() != 0) {
+                            p1Draw = d.dealCard();
+                            p1.addCard(p1Draw);
+                            cout << p1.getName() << " draws a " << p1Draw << endl;
+                            delay(argc);
+                        } else {
+
+                            cout << "No more cards to deal!" << endl;
+                            delay(argc);
+
+                        }
+
+                        nextPlayer = 2;
 
                     }
-
-                    if (cardCounter > 1) {
-
-                        p2.removeCardFromBook(p1Card);
-                    }
-
-                    cardCounter = 0;
-                    nextPlayer = 1;
                 }
-
                 else {
 
                     cout << p2.getName() << ": Go Fish!" << endl;
-                    delay(2);
+                    delay(argc);
                     cout << p1.getName() << " fishes in the deck..." << endl;
-                    delay(2);
+                    delay(argc);
 
                     if (d.size() != 0) {
-                       p1Draw = d.dealCard();
-                       p1.addCard(p1Draw);
-                       cout << p1.getName() << " draws a " << p1Draw << endl;
-                       delay(2);
-                    }
-
-                    else {
+                        p1Draw = d.dealCard();
+                        p1.addCard(p1Draw);
+                        cout << p1.getName() << " draws a " << p1Draw << endl;
+                        delay(argc);
+                    } else {
 
                         cout << "No more cards to deal!" << endl;
-                        delay(2);
+                        delay(argc);
 
                     }
 
                     nextPlayer = 2;
 
                 }
-
                 cout << p1.getName() <<"'s Hand: " << p1.showHand() << endl;
-                delay(2);
+                delay(argc);
 
                 if (p1.checkHandForBook(book1, book2)) {
-                        //while (p1.checkHandForBook(book1, book2)) {
 
-                            p1.bookCards(book1, book2);
-                            cout << "Book Found! " << p1.getName() << " books the " << book1 << " and " << book2
-                                 << endl;
-                            delay(2);
-
+                        p1.bookCards(book1, book2);
+                        cout << "Book Found! " << p1.getName() << " books the " << book1 << " and " << book2 << endl;
+                        delay(argc);
+                        cout << p1.getName() << " has " << p1.getBookSize() << " books." << endl;
+                        delay(argc);
 
                 }
 
@@ -137,80 +158,94 @@ int main (){
                     gameOn = false;
 
                 }
+
                 break;
 
             case 2:
-
+                system("clear");
                 cout << "It is " << p2.getName() << "'s turn." << endl;
-                delay(2);
+                delay(argc);
+                if (p2.getHandSize() == 0) {
+                    if (d.size() != 0) {
+                        newCard = d.dealCard();
+                        p2.addCard(newCard);
+                    }
+                }
                 cout << p2.getName() << "'s Hand is: " << p2.showHand() << endl;
-                delay(2);
+                delay(argc);
                 p2Card = p2.chooseCardFromHand();
-                cout << p2.getName() << ": Do you have any " << p1Card.rankString(p2Card.getRank()) << "'s?"<< endl;
-                delay(2);
+                cout << p2.getName() << ": Do you have any " << p2Card.rankString(p2Card.getRank()) << "'s?"<< endl;
+                delay(argc);
 
                 cout << p1.getName() << "'s Hand: " << p1.showHand() << endl;
-                delay(2);
+                delay(argc);
 
-                cardCounter = 0;
+                if(p1.getHandSize() !=0) {
+                    if (p1.sameRankInHand(p2Card)) {
 
-                if(p1.sameRankInHand(p2Card)) {
+                        cout << p1.getName() << ": Yes I do." << endl;
+                        delay(argc);
 
-                    cout << p1.getName() << ": Yes I do." << endl;
-                    delay(2);
+                        while (p1.sameRankInHand(p2Card)) {
 
-                    while (p1.sameRankInHand(p2Card)) {
+                            p1Remove = p1.removeCardFromHand(p2Card);
+                            p2.addCard(p1Remove);
+                            cout << p1.getName() << " gives " << p2.getName() << " their " << p1Remove << endl;
+                            delay(argc);
+                        }
 
-                        p1Remove = p1.removeCardFromHand(p2Card);
-                        p2.addCard(p1Remove);
-                        cout << p1.getName() << " gives " << p2.getName() << " their " << p1Remove << endl;
-                        delay(2);
-                        cardCounter++;
+                        nextPlayer = 2;
+
                     }
+                    else {
 
-                    if (cardCounter > 1) {
-                        p1.removeCardFromBook(p2Card);
+                        cout << p1.getName() << ": Go Fish!" << endl;
+                        delay(argc);
+                        cout << p2.getName() << " fishes in the deck..." << endl;
+                        delay(argc);
+
+                        if (d.size() != 0) {
+                            p2Draw = d.dealCard();
+                            p2.addCard(p2Draw);
+                            cout << p2.getName() << " draws a " << p2Draw << endl;
+                            delay(argc);
+                        } else {
+                            cout << "No more cards to deal!" << endl;
+                            delay(argc);
+                        }
+                        nextPlayer = 1;
+
                     }
-
-                    cardCounter = 0;
-                    nextPlayer = 2;
-
                 }
-
                 else {
 
                     cout << p1.getName() << ": Go Fish!" << endl;
-                    delay(2);
+                    delay(argc);
                     cout << p2.getName() << " fishes in the deck..." << endl;
-                    delay(2);
+                    delay(argc);
 
                     if (d.size() != 0) {
                         p2Draw = d.dealCard();
                         p2.addCard(p2Draw);
                         cout << p2.getName() << " draws a " << p2Draw << endl;
-                        delay(2);
-                    }
-                    else {
+                        delay(argc);
+                    } else {
                         cout << "No more cards to deal!" << endl;
-                        delay(2);
+                        delay(argc);
                     }
                     nextPlayer = 1;
 
                 }
-
                 cout << p2.getName() <<"'s Hand: " << p2.showHand() << endl;
-                delay(2);
+                delay(argc);
 
                 if (p2.checkHandForBook(book3, book4)) {
 
-                    //while (p2.checkHandForBook(book3, book4)) {
-
-                        p2.bookCards(book3, book4);
-                        cout << "Book Found! " << p2.getName() << " books the " << book3 << " and " << book4 << endl;
-                        delay(2);
-
-                    //}
-
+                    p2.bookCards(book3, book4);
+                    cout << "Book Found! " << p2.getName() << " books the " << book3 << " and " << book4 << endl;
+                    delay(argc);
+                    cout << p2.getName() << " has " << p2.getBookSize() << " books." << endl;
+                    delay(argc);
                 }
 
                 if (p2.getBookSize() == WINSIZE) {
@@ -235,6 +270,7 @@ void dealHand(Deck &d, Player &p, int numCards)
 
 void shuffleAnimation() {
     for (int i = 0; i < 5; i++) {
+        system("clear");
         cout << "Shuffling the deck" << endl;
         delay(1);
         system("clear");
@@ -254,11 +290,11 @@ void delay (int n){
     int dummy=0;
     const int DELAY = 100000000;
 
-    /*for (int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) {
         while (dummy < DELAY){
             dummy++;
         }
         dummy = 0;
-    }*/
+    }
 
 }
