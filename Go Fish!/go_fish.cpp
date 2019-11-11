@@ -39,7 +39,7 @@ int main (){
     Player p1("Tuna");
     Player p2("Cod");
 
-    Card p1Card, p2Card, book1, book2, p1Draw, p2Draw, p2Remove, p1Remove, book3, book4, newCard;   //will be needed in game impementation
+    Card p1Card, p2Card, book1, book2, p1Draw, p2Draw, p2Remove, p1Remove, book3, book4, newCard;   //will be needed in game implementation
     
     cout << "How much delay?\n0 - No Delay\n2 - Fast Game\n5 - Slow Game" << endl;      //allows user to control animation time
     cin >> delayLen;
