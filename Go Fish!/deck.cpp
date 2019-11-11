@@ -7,8 +7,9 @@ using namespace std;
     Deck::Deck(){           // pristine, sorted deck
         myIndex = 0;
         Card::Suit s;
+
         for (int i = 0; i < 4; i++){
-            switch(i){
+            switch(i){                  //switches suit so that all suits get put in order
                 case 0:
                     s = Card::spades;
                     break;
@@ -22,15 +23,14 @@ using namespace std;
                     s = Card::clubs;
                     break;
             }
-            for (int j = 1; j < 14; j++){
 
-                myCards[myIndex] = *(new Card(j, s));
-                myIndex++;
+            for (int j = 1; j < 14; j++){               //dynamically allocates space for cards in deck,
+                myCards[myIndex] = *(new Card(j, s));   //no need for destructor since we never delete cards
+                myIndex++;                              //instead we increment index and deal from there
             }
         }
 
         myIndex = 0;
-
         srand((unsigned)time(0));
     }
 
@@ -47,9 +47,6 @@ using namespace std;
                 myCards[sw2] = temp;
 
         }
-
-
-
     }
 
     Card Deck::dealCard(){   // get a card, after 52 are dealt, fail

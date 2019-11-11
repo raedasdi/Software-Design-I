@@ -27,7 +27,7 @@ class Deck
     
     Deck();           // pristine, sorted deck
 
-    void shuffle();   // shuffle the deck, all 52 cards present
+    void shuffle();   // shuffle the deck, all 52 cards present, shuffle algorithm is same as UTPod
     Card dealCard();   // get a card, after 52 are dealt, fail 
 
     int  size() const; // # cards left in the deck
