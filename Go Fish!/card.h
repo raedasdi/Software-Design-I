@@ -36,7 +36,7 @@ class Card
 
     Card(int rank, Suit s);
 
-    Card(const Card &c);
+    Card(const Card &c);                   //Copy Constructor
 
     string toString()              const;  // return string version e.g. Ac 4h Js
     bool sameSuitAs(const Card& c) const;  // true if suit same as c
@@ -47,7 +47,7 @@ class Card
     
     bool operator == (const Card& rhs) const;
     bool operator != (const Card& rhs) const;
-    void operator  = (const Card& rhs);
+    void operator  = (const Card& rhs);    // assignment operator overload
 
     
   private:

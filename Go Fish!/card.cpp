@@ -23,7 +23,6 @@ using namespace std;
         string suit = suitString(mySuit);
 
         return rank+suit;
-
     }
     
     bool Card::sameSuitAs(const Card& c) const{  // true if suit same as c
@@ -37,6 +36,7 @@ using namespace std;
 
     string Card::suitString(Suit s) const{	 // return "s", "h",...
         string suit;
+
         switch (s){
             case spades:
                 suit = 's';
@@ -51,6 +51,7 @@ using namespace std;
                 suit = 'c';
                 break;
         }
+
         return suit;
     }   
 
@@ -76,22 +77,19 @@ using namespace std;
     bool Card::operator == (const Card& rhs) const{
         if (this->myRank == rhs.myRank && this->mySuit == rhs.mySuit) {return true;}
         else {return false;}
-
     }
 
     bool Card::operator != (const Card& rhs) const{
         if (this->myRank != rhs.myRank || this->mySuit != rhs.mySuit) {return true;}
         else {return false;}
-
     }
 
     void Card::operator=(const Card &rhs) {
         myRank = rhs.myRank;
         mySuit = rhs.mySuit;
-
     }
 
     ostream& operator << (ostream& out, const Card &c){
-    out << c.toString();
-    return out;
+        out << c.toString();
+        return out;
     }
