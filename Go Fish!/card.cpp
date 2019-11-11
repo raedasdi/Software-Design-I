@@ -59,13 +59,13 @@ using namespace std;
 
         switch (r) {
             case 1:
-                return 'A';
+                return "A";
             case 11:
-                return 'J';
+                return "J";
             case 12:
-                return 'Q';
+                return "Q";
             case 13:
-                return 'K';
+                return "K";
             default:
                 rank = to_string(getRank());
         }
