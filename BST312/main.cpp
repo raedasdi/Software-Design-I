@@ -15,7 +15,7 @@ using namespace std;
 template <typename T>
 void print(vector<T> vec){
     for(int i = 0 ; i < vec.size() ; i++){
-        cout << vec[i] << endl;;
+        cout << vec[i] << endl;
     }
 }
 
@@ -28,7 +28,7 @@ int main() {
    
     string s;
     inFile >> s;
-    while (inFile) {;
+    while (inFile) {
         cout << "inserting ... " << s << endl;
         bst.insertItem(s);
         inFile >> s;
@@ -54,6 +54,7 @@ int main() {
     cout << endl;
     cout << "number of nodes in tree after delete is " << bst.countNodes() << endl;
     cout << endl;
+    return 0;
 
 }
 
