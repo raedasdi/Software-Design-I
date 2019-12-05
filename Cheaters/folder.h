@@ -8,6 +8,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <ifstream>
 #include "chunks.h"
 
 using namespace std;
@@ -18,7 +19,13 @@ private:
     vector<string> files;
 
 public:
+    Folder();
 
+    Folder(string path);
+
+    void loadFiles();
+
+    string getFileName(int index);
 
 };
 #endif
