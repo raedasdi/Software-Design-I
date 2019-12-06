@@ -19,14 +19,14 @@ int Chunk::getChunkSize(){
     return chunkSize;
 }
 
-void Chunk::fillChunk(string path) {
+void Chunk::fillDocString(string path) {
     ifstream file;
     file.open(path);
     string temp;
 
     while (!file.eof()){
         file >> temp;
-        chunkString.push_back(temp);
+        chunkList.push_back(temp);
     }
 }
 
@@ -52,7 +52,7 @@ void Chunk::makeChunkList() {
 }
 
 string Chunk::getChunk() {
-    string chunk = chunkList.begin();
+    string chunk = chunkList.at(0);
     chunkList.erase(chunkList.begin());
     return chunk;
 }
