@@ -9,7 +9,7 @@
 using namespace std;
 
 Folder::Folder() {
-    this->path = "/"
+    this->path = "/";
 }
 
 Folder::Folder(string path) {
@@ -19,7 +19,7 @@ Folder::Folder(string path) {
     }
 }
 
-int Folder::loadFiles() {
+int Folder::loadFiles(string dir, vector<string> &files) {
     DIR *dp;
     struct dirent *dirp;
     if((dp  = opendir(dir.c_str())) == NULL) {
