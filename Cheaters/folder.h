@@ -22,8 +22,10 @@ public:
     Folder();
 
     Folder(string path);
-
-    void loadFiles();
+    /* loadFiles - used provided code on website for getting list of files into vector
+     * 
+     */
+    int loadFiles();
 
     string getFileName(int index);
 
