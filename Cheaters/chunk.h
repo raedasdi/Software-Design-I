@@ -45,7 +45,7 @@ public:
      * Precondition - none
      * Output - Updated list with chunk in it
      */
-    void makeChunkList(string chunk);
+    void makeChunkList();
 
     /* emptyChunk - clears a chunk so that the next one can be put in
      * Precondition - None
