@@ -23,7 +23,7 @@ public:
 
     Folder(string path);
     /* loadFiles - used provided code on website for getting list of files into vector
-     * 
+     *
      */
     int loadFiles();
 

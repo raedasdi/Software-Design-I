@@ -30,7 +30,7 @@ void Chunk::fillChunk(string path) {
     }
 }
 
-void Chunk::makeChunkList(string chunk) {
+void Chunk::makeChunkList() {
     string chunk, temp;
     int j;
 

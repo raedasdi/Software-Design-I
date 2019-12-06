@@ -5,16 +5,22 @@
 #ifndef TABLE_H
 #define TABLE_H
 
-#include <stdio.h>
 
 using namespace std;
 
 class Table{
 private:
+    int fileNum;
+    int table [fileNum];
 
 public:
+    Table();
 
+    Table(int size);
 
+    void addToTable(int row, int column);
+
+    int getValueAt(int row, int col);
 };
 
 #endif
