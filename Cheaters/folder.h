@@ -5,11 +5,14 @@
 #ifndef FOLDER_H
 #define FOLDER_H
 
+#include <fstream>
+#include <sys/types.h>
+#include <dirent.h>
+#include <errno.h>
 #include <vector>
 #include <string>
 #include <iostream>
-#include <ifstream>
-#include "chunks.h"
+#include "chunk.h"
 
 using namespace std;
 
@@ -25,7 +28,7 @@ public:
     /* loadFiles - used provided code on website for getting list of files into vector
      *
      */
-    int loadFiles();
+    int loadFiles(string dir, vector<string> &files);
 
     string getFileName(int index);
 
