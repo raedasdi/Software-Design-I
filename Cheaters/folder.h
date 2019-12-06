@@ -28,9 +28,13 @@ public:
     /* loadFiles - used provided code on website for getting list of files into vector
      *
      */
-    int loadFiles(string dir, vector<string> &files);
+    int loadFiles(string dir);
 
     string getFileName(int index);
+
+    string getPath();
+
+    vector<string> getFiles();
 
 };
 #endif

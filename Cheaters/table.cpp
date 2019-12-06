@@ -1,12 +1,20 @@
 #include <stdio.h>
 #include "table.h"
+#include <iostream>
 
 
 using namespace std;
 
 Table::Table() {
     this->fileNum = 5;
-    for (int i = 0; j < this->fileNum; i++){
+
+    table = new int* [fileNum];
+
+    for (int it = 0; it < this->fileNum; it++){
+        table[it] = new int [fileNum];
+    }
+
+    for (int i = 0; i < this->fileNum; i++){
         for(int j = 0; j < this->fileNum; j++){
             table[i][j] = 0;
         }
@@ -15,7 +23,14 @@ Table::Table() {
 
 Table::Table(int size) {
     this->fileNum = size;
-    for (int i = 0; j < this->fileNum; i++){
+
+    table = new int* [fileNum];
+
+    for (int it = 0; it < this->fileNum; it++){
+        table[it] = new int [fileNum];
+    }
+
+    for (int i = 0; i < this->fileNum; i++){
         for(int j = 0; j < this->fileNum; j++){
             table[i][j] = 0;
         }
@@ -23,7 +38,7 @@ Table::Table(int size) {
 }
 
 void Table::addToTable(int row, int column) {
-    this->table [row][column]++;
+    table [row][column]++;
 }
 
 /*void Table::getCheaters() {
@@ -44,4 +59,16 @@ int Table::getValueAt(int row, int col) {
 
 int Table::getFileNum() {
     return this->fileNum;
+}
+
+void Table::showTable() {
+    for (int i = 0; i < fileNum; i++){
+        for (int j = 0; j < fileNum; j++){
+            if (j <= i) cout << ' ';
+            else {
+                cout << this->getValueAt(i, j) << ' ';
+                if (j == fileNum - 1) cout << endl;
+            }
+        }
+    }
 }

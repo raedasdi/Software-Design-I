@@ -19,7 +19,7 @@ Folder::Folder(string path) {
     }
 }
 
-int Folder::loadFiles(string dir, vector<string> &files) {
+int Folder::loadFiles(string dir) {
     DIR *dp;
     struct dirent *dirp;
     if((dp  = opendir(dir.c_str())) == NULL) {
@@ -28,12 +28,22 @@ int Folder::loadFiles(string dir, vector<string> &files) {
     }
 
     while ((dirp = readdir(dp)) != NULL) {
-        files.push_back(string(dirp->d_name));
+        this->files.push_back(string(dirp->d_name));
     }
     closedir(dp);
+    files.erase(files.begin());
+    files.erase(files.begin());
     return 0;
 }
 
 string Folder::getFileName(int index) {
     return files[index];
+}
+
+string Folder::getPath() {
+    return this->path;
+}
+
+vector<string> Folder::getFiles() {
+    return this->files;
 }

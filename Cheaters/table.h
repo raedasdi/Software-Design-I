@@ -11,9 +11,13 @@ using namespace std;
 class Table{
 private:
     int fileNum;
-    int table [fileNum];
+    int **table;
 
 public:
+    /* To initialize array I referenced code from StackExchange on how to initialize
+     * 2D Arrays. Declared as int ** in the private variable. Then in constructor I
+     * Dynamically allocated
+     */
     Table();
 
     Table(int size);
@@ -23,6 +27,8 @@ public:
     int getValueAt(int row, int col);
 
     int getFileNum();
+
+    void showTable();
 };
 
 #endif
