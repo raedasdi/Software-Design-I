@@ -47,3 +47,7 @@ string Folder::getPath() {
 vector<string> Folder::getFiles() {
     return this->files;
 }
+
+int Folder::getFileNum() {
+    return this->files.size();
+}

@@ -4,6 +4,12 @@
 #include <vector>
 #include <string>
 #include <iostream>
-#include <hashMap.h>
+#include "hashMap.h"
 
 using namespace std;
+
+HashMap::HashMap() {
+
+}
+
+HashMap::

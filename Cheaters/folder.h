@@ -36,5 +36,7 @@ public:
 
     vector<string> getFiles();
 
+    int getFileNum();
+
 };
 #endif

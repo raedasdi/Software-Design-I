@@ -33,6 +33,7 @@ public:
          hashMap.push_back(temp);
       }
    }
+
    void push(string const &s, int fileIndex){
       int key = 0;
       for (int i = 0; i < s.length(); i++){
