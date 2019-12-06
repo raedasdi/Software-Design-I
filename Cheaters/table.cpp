@@ -41,3 +41,7 @@ void Table::addToTable(int row, int column) {
 int Table::getValueAt(int row, int col) {
     return table[row][col];
 }
+
+int Table::getFileNum() {
+    return this->fileNum;
+}

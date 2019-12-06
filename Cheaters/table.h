@@ -21,6 +21,8 @@ public:
     void addToTable(int row, int column);
 
     int getValueAt(int row, int col);
+
+    int getFileNum();
 };
 
 #endif
