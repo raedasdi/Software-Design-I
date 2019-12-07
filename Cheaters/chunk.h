@@ -18,6 +18,7 @@ private:
     int chunkSize;
     vector<string> docstring;
     vector<string> chunkList;
+    int index;
 public:
     /* Chunk - default chunk constructor
      * Initializes chunkSize to 6
@@ -52,6 +53,10 @@ public:
      * Output - chunk is empty
      */
     string getChunk();
+
+    int getChunkVectorSize(){
+      return chunkList.size();
+   }
 
 };
 #endif
